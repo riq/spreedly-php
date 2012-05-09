@@ -108,16 +108,16 @@ class Spreedly {
 			// In this case, $options is a string representing the screen name.
 			// For backwards compatibility only.
 			// Don't use this except for legacy code.
-			$url .= "/subscribe/$plan_id/".urlencode($options);
+			$url .= "/subscribe/$plan_id/".rawurlencode($options);
 		} else if (is_array($options)) {
 			// we have an array of options.
 			if (isset($options['token'])) {
-				$url .= "/".urlencode($options['token']);
+				$url .= "/".rawurlencode($options['token']);
 				unset($options['token']);
 			}
 			$url .= "/subscribe/$plan_id";
 			if (isset($options['screen_name'])) {
-				$url .= "/".urlencode($options['screen_name']);
+				$url .= "/".rawurlencode($options['screen_name']);
 				unset($options['screen_name']);
 			}
 
@@ -126,7 +126,7 @@ class Spreedly {
 			foreach ($options as $key=>$value) {
 				if (!in_array($key, $valid_params))
 					throw new Exception("The key '$key' is not valid for Spreedly::get_subscribe_url");
-				$query_values[] = $key."=".urlencode($value);
+				$query_values[] = $key."=".rawurlencode($value);
 			}
 			if (count($query_values)) {
 				$url .= "?".implode("&", $query_values);
