@@ -165,6 +165,30 @@ class Spreedly {
 	}
 
 	/**
+	 * Method: change_subscription_plan
+	 *
+	 * Will move a subscriber onto a new plan specified by ID. This call does not 
+	 * do any prorating, it doesn't generate an invoice, it doesn't notify your customer, 
+	 * it doesn't affect your customer's active_until, and it doesn't charge them anything. 
+	 * Your customer's feature level is immediately changed to that of the new plan. 
+	 * The next time your customer is renewed, we'll use the details of the new plan to do it.
+	 *
+	 * Success Returns: stdClass Object ( [response] => Subscription plan successfully changed. [code] => 200 )
+	 *
+	 * http://spreedly.com/manual/integration-reference/change-subscriber-subscription-plan
+	 */
+	public static function change_subscription_plan($subscription_id, $subscriber_id) {
+		// Build up subscription plan xml
+		$obj = new StdClass();
+		$obj->subscription_plan = new StdClass();
+		$obj->subscription_plan->id = $subscription_id;
+		$xml = Spreedly::__to_xml_params($obj);
+
+		// Run the spreedly call
+		return Spreedly::__curl_request("/subscribers/$subscriber_id/change_subscription_plan.xml", "put", $xml);
+	}
+
+	/**
 	 * Method: __curl_request
 	 *
 	 * Internal method used to make an HTTP request to Spreedly.
