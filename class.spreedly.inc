@@ -46,7 +46,7 @@ class Spreedly {
 	public static function configure($site_name, $token) {
 		self::$site_name = $site_name;
 		self::$token = $token;
-		self::$base_uri = "https://spreedly.com/api/v4/$site_name";
+		self::$base_uri = "https://subs.pinpayments.com/api/v4/$site_name";
 	}
 
 	/**
@@ -56,7 +56,7 @@ class Spreedly {
 	 * token is returned with the subscriber (i.e. by SpreedlySubscriber::find)
 	 */
 	public static function get_edit_subscriber_url($token) {
-		return "https://spreedly.com/".self::$site_name."/subscriber_accounts/$token";
+		return "https://subs.pinpayments.com/".self::$site_name."/subscriber_accounts/$token";
 	}
 
 	/**
@@ -66,7 +66,7 @@ class Spreedly {
 	 * administer a user.
 	 */
 	public static function get_admin_subscriber_url($id) {
-		return "https://spreedly.com/".self::$site_name."/subscribers/$id";
+		return "https://subs.pinpayments.com/".self::$site_name."/subscribers/$id";
 	}
 
 	/**
@@ -103,7 +103,7 @@ class Spreedly {
 			throw new Exception("plan_id must be an integer");
 		}
 
-		$url = "https://spreedly.com/".self::$site_name."/subscribers/$id";
+		$url = "https://subs.pinpayments.com/".self::$site_name."/subscribers/$id";
 		if (is_string($options)) {
 			// In this case, $options is a string representing the screen name.
 			// For backwards compatibility only.
